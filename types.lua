@@ -1,0 +1,13 @@
+---@class NuiMessage
+---@field action string
+---@field data? any
+
+---@class CharacterInfo
+---@field charId string
+---@field firstName string
+---@field lastName string
+---@field dob string
+---@field national string
+---@field sex string
+---@field job string
+---@field jobGrade string

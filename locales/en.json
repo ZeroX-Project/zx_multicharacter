@@ -1,0 +1,34 @@
+{
+  "NUI_register": "Register",
+  "NUI_citizenid": "Citizen ID",
+  "NUI_job": "Job",
+  "NUI_jobGrade": "Job Grade",
+  "NUI_birthdate": "Birth Date",
+  "NUI_nationality": "Nationality",
+  "NUI_gender": "Gender",
+
+  "NUI_spawn": "Spawn",
+  "NUI_delete": "Delete",
+
+  "NUI_male": "Male",
+  "NUI_female": "Female",
+  "NUI_firstName": "First Name",
+  "NUI_lastName": "Last Name",
+  "NUI_enter_firstName": "Enter your First Name",
+  "NUI_enter_lastName": "Enter your Last Name",
+  "NUI_select_nationality": "Select Nationality",
+  "NUI_enter_birthdate": "Enter your Birth Date",
+  "NUI_select_gender": "Select Gender",
+  "NUI_enter_gender": "Enter your Gender",
+
+  "NUI_invalid_firstName": "First Name must contain at least 3 character(s)",
+  "NUI_invalid_lastName": "Last Name must contain at least 3 character(s)",
+  "NUI_invalid_date": "Date is required",
+  "NUI_invalid_format": "Format invalid",
+
+  "NUI_welcome_title": "Welcome to ZeroX Roleplay ID",
+  "NUI_welcome_message": "Please create your character identity first",
+
+  "char_male": "Male",
+  "char_female": "Female"
+}

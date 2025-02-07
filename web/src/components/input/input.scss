@@ -1,0 +1,24 @@
+.form {
+  @apply flex flex-col rounded-md p-4 shadow-md;
+  &__title {
+    @apply text-center text-xl font-semibold text-gray-700;
+  }
+  &__label {
+    @apply mb-2 font-medium;
+  }
+  &__input {
+    @apply flex h-[40px] w-full items-center justify-center rounded bg-sky-100 px-2 ps-8 leading-tight text-gray-700 placeholder-gray-500 shadow outline-none duration-200 focus:border-sky-200 !important;
+  }
+  &__select {
+    @apply flex h-[40px] w-full items-center justify-center rounded bg-sky-100 leading-tight text-gray-700 shadow outline-none duration-200 focus:border-sky-200 !important;
+  }
+  &__error {
+    @apply py-1 text-sm text-red-500;
+  }
+  &__icon {
+    @apply absolute z-10 flex h-[40px] items-center justify-center p-2 text-gray-500;
+  }
+}
+.react-datepicker-wrapper {
+  @apply w-full;
+}

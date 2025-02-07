@@ -1,0 +1,4 @@
+{
+  "Lua.diagnostics.globals": ["cache", "lib", "MySQL", "QBX", "locale"],
+  "Lua.diagnostics.disable": ["lowercase-global"]
+}
