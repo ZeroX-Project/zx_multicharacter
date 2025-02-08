@@ -1,6 +1,7 @@
 return {
   locale = 'en',
   setPedVisible = true,
+  spawnAtLastLocation = true,
   defaultSpawn = vec4(-269.1097, -955.7875, 31.2231, 208.5021),
   maxCharacter = 1,
   loadingModelsTimeout = 30000, -- Waiting time for ox_lib to load the models before throws an error, for low specs pc

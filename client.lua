@@ -287,30 +287,41 @@ RegisterNUICallback("spawnCharacter", function(char, cb)
 
   destroyPreviewCam()
 
-  pcall(function()
-    exports.spawnmanager:spawnPlayer({
-      x = char.coords.x,
-      y = char.coords.y,
-      z = char.coords.z,
-      heading = char.coords.w
-    })
-  end)
-
-  TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
-  TriggerEvent('QBCore:Client:OnPlayerLoaded')
-  TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
-  TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
-
   FreezeEntityPosition(cache.ped, false)
   DisplayRadar(true)
 
   SetNuiFocus(false, false)
   SendNUIMessage({ action = 'closeNui' })
 
+  if config.spawnAtLastLocation then
+    pcall(function()
+      exports.spawnmanager:spawnPlayer({
+        x = char.coords.x,
+        y = char.coords.y,
+        z = char.coords.z,
+        heading = char.coords.w
+      })
+    end)
+  else
+    if GetResourceState('qbx_spawn') == 'missing' then
+      spawnDefault()
+    else
+      if config.startingApartment then
+        TriggerEvent('apartments:client:setupSpawnUI', newData)
+      else
+        TriggerEvent('qbx_core:client:spawnNoApartments')
+      end
+    end
+  end
+
+  TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
+  TriggerEvent('QBCore:Client:OnPlayerLoaded')
+  TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
+  TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
+
   onMenu = false
   onRegistered = false
   DoScreenFadeIn(1000)
-
   while not IsScreenFadedIn() do
     Wait(0)
   end
