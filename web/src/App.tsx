@@ -7,6 +7,7 @@ import { useAppDispatch } from './store';
 import { setConfig } from './store/config';
 import { fetchNui } from './utils/fetchNui';
 import { OpenNUI } from './components';
+import { setAssetsPath } from './store/assetsPath';
 
 debugData([
   {
@@ -66,11 +67,13 @@ export const App: FC = () => {
 
   useNuiEvent<{
     locale: { [key: string]: string };
+    assets: string;
     config: Config;
-  }>('init', ({ locale, config }) => {
+  }>('init', ({ locale, config, assets }) => {
     for (const name in locale) Locale[name] = locale[name];
 
     dispatch(setConfig(config));
+    setAssetsPath(assets);
   });
 
   fetchNui('uiLoaded', {});
