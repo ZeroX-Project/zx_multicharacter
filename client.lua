@@ -6,6 +6,7 @@ local randomPeds = require('shared.randomPeds')
 
 local previewCam
 local onRegistered = false
+local onMenu = false
 local cidNewCharacter
 
 local function init()
@@ -40,8 +41,8 @@ local function setupPreviewCam()
   DoScreenFadeIn(1000)
 
   local cameras = {
-    vec3(0, 2.2, 0.2),
-    vec3(0, 0, -0.05),
+    vec3(0.0, 2.0, 0.6),
+    vec3(-0.6, -2.2, -0.05),
   }
   local coords, point = table.unpack(cameras)
 
@@ -105,6 +106,7 @@ local function createCharacter()
 
   if not onRegistered then
     onRegistered = true
+    onMenu = true
 
     SetNuiFocus(true, true)
     SendNUIMessage({
@@ -177,6 +179,7 @@ local function chooseCharacter()
   SetTimecycleModifier('default')
 
   if options and options[1] ~= nil then
+    onMenu = true
     SetNuiFocus(true, true)
     SendNUIMessage({
       action = 'openUI',
@@ -230,14 +233,17 @@ RegisterNUICallback('registerSubmit', function(data, cb)
     cid = cidNewCharacter
   })
 
+  destroyPreviewCam()
+
+  Wait(250)
+
+
   SetNuiFocus(false, false)
   SendNUIMessage({ action = 'closeNui' })
 
-  destroyPreviewCam()
   onRegistered = false
   cidNewCharacter = nil
-
-  Wait(250)
+  onMenu = false
 
   if GetResourceState('qbx_spawn') == 'missing' then
     spawnDefault()
@@ -288,6 +294,8 @@ RegisterNUICallback("spawnCharacter", function(char, cb)
   SetNuiFocus(false, false)
   SendNUIMessage({ action = 'closeNui' })
 
+  onMenu = false
+  onRegistered = false
   DoScreenFadeIn(1000)
 
   while not IsScreenFadedIn() do
@@ -299,6 +307,7 @@ end)
 
 RegisterNUICallback("createNewCharacter", function(data, cb)
   cidNewCharacter = data.cid
+  onMenu = false
   SetNuiFocus(false, false)
   SendNUIMessage({ action = 'closeNui' })
   createCharacter()
@@ -307,6 +316,7 @@ end)
 
 RegisterNUICallback("deleteCharacter", function(char, cb)
   TriggerServerEvent('qbx_core:server:deleteCharacter', char.citizenid)
+  onMenu = false
   SetNuiFocus(false, false)
   SendNUIMessage({ action = 'closeNui' })
   destroyPreviewCam()
@@ -337,3 +347,15 @@ CreateThread(function()
     end
   end
 end)
+
+if config.setPedVisible then
+  Citizen.CreateThread(function()
+    while setPedVisible do
+      SetPlayerVisibleLocally(PlayerId(), true)
+      Wait(5)
+      if not onMenu then
+        break
+      end
+    end
+  end)
+end
