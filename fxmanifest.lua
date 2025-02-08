@@ -11,7 +11,12 @@ description 'ZeroX Multicharacter for QBX core'
 shared_scripts {
   '@ox_lib/init.lua',
   '@qbx_core/modules/lib.lua',
-  'config/*.lua'
+}
+
+ox_libs {
+  'locale',
+  'table',
+  'math',
 }
 
 client_scripts {
@@ -25,7 +30,11 @@ server_scripts {
 }
 
 files {
-  'modules/*.lua',
+  'data/*.lua',
+  'shared/*.lua',
+  'locales/*.json',
+  'web/assets/*',
+  'web/assets/**/*',
   'web/build/index.html',
   'web/build/**/*',
 }
