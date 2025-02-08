@@ -11,7 +11,7 @@ export const PlayerInfo: React.FC<{ characterData: CharacterInfoProp }> = ({ cha
         {characterData && (
           <>
             <p className="text-4xl font-bold tracking-tight">
-              {characterData.firstName} <span className="text-2xl tracking-tight">{characterData.lastName}</span>
+              {characterData.firstname} <span className="text-2xl tracking-tight">{characterData.lastname}</span>
             </p>
 
             <div className="my-3 h-1 w-full rounded-xl bg-sky-200"></div>

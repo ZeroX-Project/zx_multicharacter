@@ -3,7 +3,7 @@ import { RegisterFormType } from '../utils/register';
 import { FieldErrors } from 'react-hook-form';
 import { ReactElement } from 'react';
 
-type RegisterFieldName = 'firstName' | 'lastName' | 'nationality' | 'birthdate' | 'gender';
+type RegisterFieldName = 'firstname' | 'lastname' | 'nationality' | 'birthdate' | 'gender';
 
 export interface InputErrorProps {
   name: RegisterFieldName;

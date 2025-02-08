@@ -25,12 +25,12 @@ export const RegisterForm: FC = () => {
   const onSubmit: SubmitHandler<RegisterFormType> = (data) => {
     const badWords = config.badWords;
 
-    if (badWords.some((word) => data.firstName.toLowerCase().includes(word))) {
-      methods.setError('firstName', { message: 'Invalid first name or last name. Please try again.' });
+    if (badWords.some((word) => data.firstname.toLowerCase().includes(word))) {
+      methods.setError('firstname', { message: 'Invalid first name or last name. Please try again.' });
       return;
     }
-    if (badWords.some((word) => data.lastName.toLowerCase().includes(word))) {
-      methods.setError('lastName', { message: 'Invalid first name or last name. Please try again.' });
+    if (badWords.some((word) => data.lastname.toLowerCase().includes(word))) {
+      methods.setError('lastname', { message: 'Invalid first name or last name. Please try again.' });
       return;
     }
 
@@ -41,8 +41,8 @@ export const RegisterForm: FC = () => {
     }
 
     const newPlayerData = {
-      firstname: capitalizeFirstLetter(data.lastName),
-      lastname: capitalizeFirstLetter(data.firstName),
+      firstname: capitalizeFirstLetter(data.firstname),
+      lastname: capitalizeFirstLetter(data.lastname),
       nationality: capitalizeFirstLetter(data.nationality.value),
       gender: data.gender.value,
       birthdate: birthdate,
@@ -71,17 +71,17 @@ export const RegisterForm: FC = () => {
         <div className="mb-5 flex w-[400px] flex-col gap-5 rounded-md border border-sky-300 bg-sky-300 bg-opacity-25 p-4 backdrop-filter">
           <Input
             type="text"
-            label={Locale.firstName || 'First Name'}
-            placeholder={Locale.enter_firstName || 'Enter your First Name'}
-            name="firstName"
+            label={Locale.firstname || 'First Name'}
+            placeholder={Locale.enter_firstname || 'Enter your First Name'}
+            name="firstname"
             errors={errors}
             icon={<FaUser />}
           />
           <Input
             type="text"
-            label={Locale.lastName || 'Last Name'}
-            placeholder={Locale.enter_lastName || 'Enter your First Name'}
-            name="lastName"
+            label={Locale.lastname || 'Last Name'}
+            placeholder={Locale.enter_lastname || 'Enter your First Name'}
+            name="lastname"
             errors={errors}
             icon={<FaUserTag />}
           />

@@ -156,8 +156,8 @@ local function chooseCharacter()
     if character then
       options[i] = {
         charId = character.citizenid,
-        firstName = character.charinfo.firstname,
-        lastName = character.charinfo.lastname,
+        firstname = character.charinfo.firstname,
+        lastname = character.charinfo.lastname,
         dob = character.charinfo.birthdate,
         national = character.charinfo.nationality,
         sex = character.charinfo.gender == 0 and 'Male' or "Female",
@@ -222,8 +222,8 @@ end
 
 RegisterNUICallback('registerSubmit', function(data, cb)
   local newData = lib.callback.await('qbx_core:server:createCharacter', false, {
-    firstname = data.firstlame,
-    lastname = data.firstlame,
+    firstname = data.firstname,
+    lastname = data.lastname,
     nationality = data.nationality,
     gender = data.gender == locale('char_male') and 0 or 1,
     birthdate = data.birthdate,

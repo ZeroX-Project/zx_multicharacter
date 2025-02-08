@@ -23,8 +23,8 @@ debugData([
 //       characters: [
 //         {
 //           charId: 'xyz123',
-//           firstName: 'John',
-//           lastName: 'Elish',
+//           firstname: 'John',
+//           lastname: 'Elish',
 //           dob: 'dd/mm/yyyy',
 //           national: 'Indonesia',
 //           sex: 'Male',
@@ -35,8 +35,8 @@ debugData([
 //         },
 //         {
 //           charId: 'xyz321',
-//           firstName: 'John2',
-//           lastName: 'Elish2',
+//           firstname: 'John2',
+//           lastname: 'Elish2',
 //           dob: 'dd/mm/yy',
 //           national: 'Indonesia',
 //           sex: 'Male',
@@ -47,8 +47,8 @@ debugData([
 //         },
 //         {
 //           charId: 'xyz312312',
-//           firstName: 'John2',
-//           lastName: 'Elish2',
+//           firstname: 'John2',
+//           lastname: 'Elish2',
 //           dob: 'dd/mm/yy',
 //           national: 'Indonesia',
 //           sex: 'Male',

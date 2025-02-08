@@ -12,17 +12,17 @@
 
   "NUI_male": "Male",
   "NUI_female": "Female",
-  "NUI_firstName": "First Name",
-  "NUI_lastName": "Last Name",
-  "NUI_enter_firstName": "Enter your First Name",
-  "NUI_enter_lastName": "Enter your Last Name",
+  "NUI_firstname": "First Name",
+  "NUI_lastname": "Last Name",
+  "NUI_enter_firstname": "Enter your First Name",
+  "NUI_enter_lastname": "Enter your Last Name",
   "NUI_select_nationality": "Select Nationality",
   "NUI_enter_birthdate": "Enter your Birth Date",
   "NUI_select_gender": "Select Gender",
   "NUI_enter_gender": "Enter your Gender",
 
-  "NUI_invalid_firstName": "First Name must contain at least 3 character(s)",
-  "NUI_invalid_lastName": "Last Name must contain at least 3 character(s)",
+  "NUI_invalid_firstname": "First Name must contain at least 3 character(s)",
+  "NUI_invalid_lastname": "Last Name must contain at least 3 character(s)",
   "NUI_invalid_date": "Date is required",
   "NUI_invalid_format": "Format invalid",
 

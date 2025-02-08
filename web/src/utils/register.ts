@@ -2,13 +2,13 @@ import { z } from 'zod';
 import { Locale } from '../store/locale';
 
 export const RegisterFormSchema = z.object({
-  firstName: z
+  firstname: z
     .string()
-    .min(3, Locale.invalid_firstName || 'First Name must contain at least 3 character(s)')
+    .min(3, Locale.invalid_firstname || 'First Name must contain at least 3 character(s)')
     .max(20),
-  lastName: z
+  lastname: z
     .string()
-    .min(3, Locale.invalid_lastName || 'Last Name must contain at least 3 character(s)')
+    .min(3, Locale.invalid_lastname || 'Last Name must contain at least 3 character(s)')
     .max(20),
   nationality: z.object({
     value: z.string(),
