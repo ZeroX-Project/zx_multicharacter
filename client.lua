@@ -1,45 +1,40 @@
 if not lib then return end
 
-config = require('shared.config')
+local config = require 'shared.config'
+local defaultSpawn = require 'shared.config'.defaultSpawn
 local randomPeds = require('shared.randomPeds')
+
 local previewCam
 local onRegistered = false
 local cidNewCharacter
 
-RegisterNetEvent('zx_multicharacter:init', function()
+local function init()
   local uiLocales = {}
   local locales = lib.getLocales()
+
   for k, v in pairs(locales) do
     if k:find('^NUI_') then
       uiLocales[k] = v
     end
   end
 
-  local nationalities = {}
-  local nationalityList = lib.load('data.nationalities')
-
-  CreateThread(function()
-    for i = 1, #nationalityList do
-      nationalities[#nationalities + 1] = { value = nationalityList[i] }
-    end
-  end)
-
   SendNUIMessage({
     action = 'init',
     data = {
       locale = uiLocales,
+      assets = 'nui://zx_multicharacter/web/assets',
       config = {
-        nationalities = nationalities,
+        nationalities = lib.load('data.nationalities'),
         maxCharacter = config.maxCharacter,
-        enableDeleteButton = config.characters.enableDeleteButton,
-        dateFormat = config.characters.dateFormat,
-        dateMin = config.characters.dateMin,
-        dateMax = config.characters.dateMax,
-        badWords = config.characters.profanityWords
+        enableDeleteButton = config.enableDeleteButton,
+        dateFormat = config.dateFormat,
+        dateMin = config.dateMin,
+        dateMax = config.dateMax,
+        badWords = config.profanityWords
       },
     }
   })
-end)
+end
 
 local function setupPreviewCam()
   DoScreenFadeIn(1000)
@@ -125,7 +120,7 @@ local function chooseCharacter()
 
   previewPed(firstCharacterCitizenId)
 
-  local position = characters[1] and characters[1].position
+  local position = characters[1] and characters[1].position or config.locations[1].pedCoords
 
   SetFollowPedCamViewMode(2)
   DisplayRadar(false)
@@ -153,7 +148,6 @@ local function chooseCharacter()
   ShutdownLoadingScreenNui()
 
   setupPreviewCam()
-
 
   local options = {}
 
@@ -188,7 +182,6 @@ local function chooseCharacter()
       action = 'openUI',
       data = {
         playerId = cache.playerId,
-        maxCharacter = config.maxCharacter,
         characters = options
       }
     })
@@ -197,10 +190,40 @@ end
 
 RegisterNetEvent('zx_multicharacter:chooseCharacter', chooseCharacter)
 
+local function spawnDefault()
+  DoScreenFadeOut(500)
+
+  while not IsScreenFadedOut() do
+    Wait(0)
+  end
+
+  destroyPreviewCam()
+
+  pcall(function()
+    exports.spawnmanager:spawnPlayer({
+      x = defaultSpawn.x,
+      y = defaultSpawn.y,
+      z = defaultSpawn.z,
+      heading = defaultSpawn.w
+    })
+  end)
+
+  TriggerServerEvent('QBCore:Server:OnPlayerLoaded')
+  TriggerEvent('QBCore:Client:OnPlayerLoaded')
+  TriggerServerEvent('qb-houses:server:SetInsideMeta', 0, false)
+  TriggerServerEvent('qb-apartments:server:SetInsideMeta', 0, 0, false)
+
+  while not IsScreenFadedIn() do
+    Wait(0)
+  end
+
+  TriggerEvent('qb-clothes:client:CreateFirstCharacter')
+end
+
 RegisterNUICallback('registerSubmit', function(data, cb)
   local newData = lib.callback.await('qbx_core:server:createCharacter', false, {
-    firstname = data.firstName,
-    lastname = data.firstLame,
+    firstname = data.firstlame,
+    lastname = data.firstlame,
     nationality = data.nationality,
     gender = data.gender == locale('char_male') and 0 or 1,
     birthdate = data.birthdate,
@@ -208,12 +231,24 @@ RegisterNUICallback('registerSubmit', function(data, cb)
   })
 
   SetNuiFocus(false, false)
+  SendNUIMessage({ action = 'closeNui' })
+
   destroyPreviewCam()
   onRegistered = false
   cidNewCharacter = nil
 
-  SendNUIMessage({ action = 'closeNui' })
-  chooseCharacter()
+  Wait(250)
+
+  if GetResourceState('qbx_spawn') == 'missing' then
+    spawnDefault()
+  else
+    if config.startingApartment then
+      TriggerEvent('apartments:client:setupSpawnUI', newData)
+    else
+      TriggerEvent('qbx_core:client:spawnNoApartments')
+    end
+  end
+
   cb({ "ok" })
 end)
 
@@ -271,7 +306,7 @@ RegisterNUICallback("createNewCharacter", function(data, cb)
 end)
 
 RegisterNUICallback("deleteCharacter", function(char, cb)
-  TriggerServerEvent('qbx_core:server:deleteCharacter', char.citizenid)
+  TriggerServerEvent('qbx_core:server:deleteCharacter', char.charId)
   SetNuiFocus(false, false)
   SendNUIMessage({ action = 'closeNui' })
   destroyPreviewCam()
@@ -280,6 +315,25 @@ RegisterNUICallback("deleteCharacter", function(char, cb)
 end)
 
 RegisterNUICallback('uiLoaded', function(_, cb)
-  print('uiLoaded')
+  print('Loaded NUI Successfully')
   cb({ 'ok' })
+end)
+
+RegisterNetEvent('qbx_core:client:playerLoggedOut', function()
+  if GetInvokingResource() then return end
+  chooseCharacter()
+end)
+
+CreateThread(function()
+  while true do
+    Wait(0)
+    if NetworkIsSessionStarted() then
+      pcall(function() exports.spawnmanager:setAutoSpawn(false) end)
+      Wait(250)
+      init()
+      Wait(250)
+      chooseCharacter()
+      break
+    end
+  end
 end)
