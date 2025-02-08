@@ -29,6 +29,12 @@
   "NUI_welcome_title": "Welcome to ZeroX Roleplay ID",
   "NUI_welcome_message": "Please create your character identity first",
 
+  "NUI_dialog_warn": "WARNING!!!",
+  "NUI_dialog_title": "Are you sure you want to delete this character?",
+  "NUI_dialog_subtitle": "By deleting this character, all the wealth in this character will disappear.",
+  "NUI_dialog_yes": "Yes, Delete",
+  "NUI_dialog_no": "No, Don't Delete",
+
   "char_male": "Male",
   "char_female": "Female"
 }
