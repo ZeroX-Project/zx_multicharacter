@@ -1,18 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '.';
 import { State } from '../typings';
-import { Nationalities } from './nationalities';
-import { BadWords } from './badWords';
 
 const initialState: State = {
   config: {
-    nationalities: Nationalities,
-    maxCharacter: 4,
+    nationalities: [],
+    maxCharacter: 0,
     enableDeleteButton: true,
-    dateFormat: 'dd/MM/yyyy',
-    dateMin: '1900-01-01',
-    dateMax: '2010-12-31',
-    badWords: BadWords,
+    dateFormat: '',
+    dateMin: '',
+    dateMax: '',
+    badWords: [],
   },
 };
 

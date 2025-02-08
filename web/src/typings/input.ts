@@ -1,4 +1,3 @@
-import { IconType } from 'react-icons';
 import { RegisterFormType } from '../utils/register';
 import { FieldErrors } from 'react-hook-form';
 import { ReactElement } from 'react';
@@ -28,7 +27,7 @@ export interface InputDateProps extends InputProps {
   minDate?: Date;
   maxDate?: Date;
   selected?: Date;
-  dateFormat?: 'dd/MM/yyyy' | 'yyyy-MM-dd' | 'MM/dd/yyyy';
+  dateFormat?: string;
 }
 
 export interface ReactSelectProps extends SelectProps {

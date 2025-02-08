@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useNuiEvent } from './hooks/useNuiEvent';
-import { Config } from './typings';
+import { ConfigProps } from './typings';
 import { debugData } from './utils/debugData';
 import { Locale } from './store/locale';
 import { useAppDispatch } from './store';
@@ -67,13 +67,13 @@ export const App: FC = () => {
 
   useNuiEvent<{
     locale: { [key: string]: string };
-    assets: string;
-    config: Config;
-  }>('init', ({ locale, config, assets }) => {
+    assetspath: string;
+    config: ConfigProps;
+  }>('init', ({ locale, config, assetspath }) => {
     for (const name in locale) Locale[name] = locale[name];
 
+    setAssetsPath(assetspath);
     dispatch(setConfig(config));
-    setAssetsPath(assets);
   });
 
   fetchNui('uiLoaded', {});

@@ -1,1 +1,1 @@
-export const BadWords: string[] = ['kontol', 'memek', 'titit', 'bad word'];
+export const BadWords: string[] = [];
