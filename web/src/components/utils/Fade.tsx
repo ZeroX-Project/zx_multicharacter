@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { cn } from '../../utils/misc';
 
 interface Props {
   in?: boolean;
@@ -16,8 +17,15 @@ const Fade: React.FC<Props> = (props) => {
   }, []);
 
   return (
-    <CSSTransition in={props.in} nodeRef={nodeRef} classNames={`transition-all duration-1000 ease-in-out ${animate}`} timeout={200} unmountOnExit>
-      <span ref={nodeRef}>{props.children}</span>
+    <CSSTransition in={props.in} nodeRef={nodeRef} classNames={cn(`transition-all duration-1000 ease-in-out `, animate)} timeout={200} unmountOnExit>
+      <span ref={nodeRef}>
+        <div className="absolute inset-0">
+          <div className="relative h-full w-full [&>div]:absolute [&>div]:inset-0 [&>div]:bg-[radial-gradient(circle_at_center,transparent,#000000)] [&>div]:opacity-50 [&>div]:mix-blend-multiply">
+            <div></div>
+          </div>
+        </div>
+        <div className="relative z-10">{props.children}</div>
+      </span>
     </CSSTransition>
   );
 };
