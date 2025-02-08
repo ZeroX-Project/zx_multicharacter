@@ -9,6 +9,9 @@ local onRegistered = false
 local onMenu = false
 local cidNewCharacter
 
+local animDictionary = "anim@amb@casino@hangout@ped_male@stand@02b@idles"
+local animationName = "idle_a"
+
 local function init()
   local uiLocales = {}
   local locales = lib.getLocales()
@@ -23,7 +26,7 @@ local function init()
     action = 'init',
     data = {
       locale = uiLocales,
-      assets = 'nui://zx_multicharacter/web/assets',
+      assetspath = 'nui://zx_multicharacter/web/assets',
       config = {
         nationalities = lib.load('data.nationalities'),
         maxCharacter = config.maxCharacter,
@@ -35,6 +38,8 @@ local function init()
       },
     }
   })
+
+  print('Loaded NUI Successfully')
 end
 
 local function setupPreviewCam()
@@ -99,6 +104,12 @@ local function previewPed(citizenId)
   else
     randomPed()
   end
+
+  if not IsEntityPlayingAnim(PlayerPedId(), animDictionary, animationName, 1) then
+    lib.requestAnimDict(animDictionary)
+    TaskPlayAnim(PlayerPedId(), animDictionary, animationName, 5.0, 5.0, -1, 1, 0, false, false, false)
+    RemoveAnimDict(animDictionary)
+  end
 end
 
 local function createCharacter()
@@ -118,11 +129,10 @@ end
 
 local function chooseCharacter()
   local characters, amount = lib.callback.await('qbx_core:server:getCharacters')
-
   local firstCharacterCitizenId = characters[1] and characters[1].citizenid
   previewPed(firstCharacterCitizenId)
 
-  local position = characters[1] and characters[1].position or config.locations[1].pedCoords
+  local position = characters[1] and characters[1].position or config.defaultSpawn
 
   SetFollowPedCamViewMode(2)
   DisplayRadar(false)
@@ -189,6 +199,10 @@ local function chooseCharacter()
       }
     })
   end
+
+  lib.requestAnimDict(animDictionary)
+  TaskPlayAnim(PlayerPedId(), animDictionary, animationName, 5.0, 5.0, -1, 1, 0, false, false, false)
+  RemoveAnimDict(animDictionary)
 end
 
 RegisterNetEvent('zx_multicharacter:chooseCharacter', chooseCharacter)
@@ -236,7 +250,6 @@ RegisterNUICallback('registerSubmit', function(data, cb)
   destroyPreviewCam()
 
   Wait(250)
-
 
   SetNuiFocus(false, false)
   SendNUIMessage({ action = 'closeNui' })
@@ -325,7 +338,6 @@ RegisterNUICallback("deleteCharacter", function(char, cb)
 end)
 
 RegisterNUICallback('uiLoaded', function(_, cb)
-  print('Loaded NUI Successfully')
   cb({ 'ok' })
 end)
 
@@ -339,9 +351,9 @@ CreateThread(function()
     Wait(0)
     if NetworkIsSessionStarted() then
       pcall(function() exports.spawnmanager:setAutoSpawn(false) end)
-      Wait(250)
+      Wait(2000) -- make sure client is finishing loaded
       init()
-      Wait(250)
+      Wait(1000)
       chooseCharacter()
       break
     end
@@ -349,11 +361,13 @@ CreateThread(function()
 end)
 
 if config.setPedVisible then
-  Citizen.CreateThread(function()
+  CreateThread(function()
     while setPedVisible do
       SetPlayerVisibleLocally(PlayerId(), true)
       Wait(5)
       if not onMenu then
+        destroyPreviewCam()
+        ClearPedTasksImmediately(PlayerPedId())
         break
       end
     end
