@@ -34,7 +34,21 @@ export const RegisterForm: FC = () => {
       return;
     }
 
-    fetchNui('registerSubmit', data);
+    const birthdate = new Date(data.birthdate).toLocaleDateString();
+
+    function capitalizeFirstLetter(val: string) {
+      return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+    }
+
+    const newPlayerData = {
+      firstname: capitalizeFirstLetter(data.lastName),
+      lastname: capitalizeFirstLetter(data.firstName),
+      nationality: capitalizeFirstLetter(data.nationality.value),
+      gender: data.gender.value,
+      birthdate: birthdate,
+    };
+
+    fetchNui('registerSubmit', newPlayerData);
   };
 
   const genderOptions = [
