@@ -1,5 +1,5 @@
 export type CharacterInfoProp = {
-  charId: string;
+  citizenid: string;
   firstname: string;
   lastname: string;
   dob: string;

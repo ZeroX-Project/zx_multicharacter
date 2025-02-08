@@ -22,7 +22,7 @@ debugData([
 //       playerId: 1,
 //       characters: [
 //         {
-//           charId: 'xyz123',
+//           citizenid: 'xyz123',
 //           firstname: 'John',
 //           lastname: 'Elish',
 //           dob: 'dd/mm/yyyy',
@@ -34,7 +34,7 @@ debugData([
 //           index: '1',
 //         },
 //         {
-//           charId: 'xyz321',
+//           citizenid: 'xyz321',
 //           firstname: 'John2',
 //           lastname: 'Elish2',
 //           dob: 'dd/mm/yy',
@@ -46,7 +46,7 @@ debugData([
 //           index: '2',
 //         },
 //         {
-//           charId: 'xyz312312',
+//           citizenid: 'xyz312312',
 //           firstname: 'John2',
 //           lastname: 'Elish2',
 //           dob: 'dd/mm/yy',

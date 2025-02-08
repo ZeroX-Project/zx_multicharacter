@@ -19,7 +19,7 @@ export const PlayerInfo: React.FC<{ characterData: CharacterInfoProp }> = ({ cha
               <div className="mb-2 tracking-tight text-neutral-300">
                 {Locale.citizenid || 'Citizen ID'}
                 <p className="flex items-center gap-2 text-neutral-50">
-                  <FaHashtag className="text-neutral-300" /> {characterData.charId}
+                  <FaHashtag className="text-neutral-300" /> {characterData.citizenid}
                 </p>
               </div>
 

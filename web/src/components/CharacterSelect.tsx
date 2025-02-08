@@ -32,7 +32,7 @@ export const CharacterSelect: React.FC<{ playerData: PlayerDataProp | undefined 
 
   function createCharacterHandler(e: any) {
     e.preventDefault();
-    fetchNui('createNewCharacter');
+    fetchNui('createNewCharacter', activePlayer?.citizenid);
   }
 
   function handleSpawn(e: any, character: CharacterInfoProp): void {
@@ -60,9 +60,9 @@ export const CharacterSelect: React.FC<{ playerData: PlayerDataProp | undefined 
           <div className="flex w-full items-center justify-start gap-10">
             {playerData?.characters.map((c, i) => (
               <button
-                key={c.charId}
+                key={c.citizenid}
                 className={cn(
-                  `flex h-10 w-10 items-center justify-center rounded-md border border-sky-300 bg-opacity-45 p-2 text-center align-middle backdrop-filter transition-all duration-100 ease-in-out hover:bg-sky-400 hover:bg-opacity-45 ${activePlayer?.charId == c.charId ? 'bg-sky-500' : 'bg-sky-300'}`
+                  `flex h-10 w-10 items-center justify-center rounded-md border border-sky-300 bg-opacity-45 p-2 text-center align-middle backdrop-filter transition-all duration-100 ease-in-out hover:bg-sky-400 hover:bg-opacity-45 ${activePlayer?.citizenid == c.citizenid ? 'bg-sky-500' : 'bg-sky-300'}`
                 )}
                 onClick={(e) => characterHandler(e, c)}
               >

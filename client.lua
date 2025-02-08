@@ -116,8 +116,8 @@ end
 
 local function chooseCharacter()
   local characters, amount = lib.callback.await('qbx_core:server:getCharacters')
-  local firstCharacterCitizenId = characters[1] and characters[1].citizenid
 
+  local firstCharacterCitizenId = characters[1] and characters[1].citizenid
   previewPed(firstCharacterCitizenId)
 
   local position = characters[1] and characters[1].position or config.locations[1].pedCoords
@@ -151,11 +151,11 @@ local function chooseCharacter()
 
   local options = {}
 
-  for i = 1, amount do
+  for i = 1, #characters do
     local character = characters[i]
     if character then
       options[i] = {
-        charId = character.citizenid,
+        citizenid = character.citizenid,
         firstname = character.charinfo.firstname,
         lastname = character.charinfo.lastname,
         dob = character.charinfo.birthdate,
@@ -253,7 +253,7 @@ RegisterNUICallback('registerSubmit', function(data, cb)
 end)
 
 RegisterNUICallback("swapCharacter", function(char, cb)
-  previewPed(char.charId)
+  previewPed(char.citizenid)
   cb({ 'ok' })
 end)
 
@@ -264,7 +264,7 @@ RegisterNUICallback("spawnCharacter", function(char, cb)
     Wait(0)
   end
 
-  lib.callback.await('qbx_core:server:loadCharacter', false, char.charId)
+  lib.callback.await('qbx_core:server:loadCharacter', false, char.citizenid)
 
   destroyPreviewCam()
 
@@ -306,7 +306,7 @@ RegisterNUICallback("createNewCharacter", function(data, cb)
 end)
 
 RegisterNUICallback("deleteCharacter", function(char, cb)
-  TriggerServerEvent('qbx_core:server:deleteCharacter', char.charId)
+  TriggerServerEvent('qbx_core:server:deleteCharacter', char.citizenid)
   SetNuiFocus(false, false)
   SendNUIMessage({ action = 'closeNui' })
   destroyPreviewCam()
