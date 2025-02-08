@@ -163,7 +163,9 @@ local function chooseCharacter()
 
   local options = {}
 
-  for i = 1, #characters do
+  local characterCount = #characters == 0 and 1 or #characters
+
+  for i = 1, characterCount do
     local character = characters[i]
     if character then
       options[i] = {
