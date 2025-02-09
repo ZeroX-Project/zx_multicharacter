@@ -4,7 +4,7 @@ import { ReactSelectProps } from '../../typings/input';
 import ReactSelect from 'react-select';
 import { InputErrorMessage } from './InputErrorMessage';
 
-export const ReactSelectInput: FC<ReactSelectProps> = ({ name, label, errors, options, isMulti, placeholder, icon }) => {
+export const ReactSelectInput: FC<ReactSelectProps> = ({ name, label, errors, options, isMulti, placeholder, icon, onChangeValue }) => {
   const { control } = useFormContext();
   return (
     <div>
@@ -21,6 +21,7 @@ export const ReactSelectInput: FC<ReactSelectProps> = ({ name, label, errors, op
               <ReactSelect
                 isMulti={isMulti}
                 onChange={onChange}
+                onInputChange={onChangeValue}
                 options={options}
                 placeholder={placeholder}
                 classNames={{

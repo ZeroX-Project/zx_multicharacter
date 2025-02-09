@@ -81,17 +81,19 @@ local function destroyPreviewCam()
   previewCam = nil
 end
 
-local function randomPed()
-  local ped = randomPeds[math.random(1, #randomPeds)]
+local function randomPed(gender)
+  local ped = gender and gender == 'Male' and randomPeds[1] or gender and gender == 'Female' and randomPeds[2] or
+      randomPeds[math.random(1, #randomPeds)]
+
   lib.requestModel(ped.model, config.loadingModelsTimeout)
   SetPlayerModel(cache.playerId, ped.model)
   pcall(function() exports['illenium-appearance']:setPedAppearance(PlayerPedId(), ped) end)
   SetModelAsNoLongerNeeded(ped.model)
 end
 
-local function previewPed(citizenId)
+local function previewPed(citizenId, gender)
   if not citizenId then
-    randomPed()
+    randomPed(gender)
     return
   end
 
@@ -352,6 +354,10 @@ end)
 
 RegisterNUICallback('uiLoaded', function(_, cb)
   cb({ 'ok' })
+end)
+
+RegisterNUICallback('changeGender', function(gender, cb)
+  previewPed(nil, gender)
 end)
 
 RegisterNetEvent('qbx_core:client:playerLoggedOut', function()

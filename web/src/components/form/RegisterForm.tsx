@@ -8,6 +8,7 @@ import { DateInput, Input, ReactSelectInput, SubmitInput } from '../input';
 import { fetchNui } from '../../utils/fetchNui';
 import { FaCalendar, FaGenderless, FaGlobe, FaUser, FaUserTag } from 'react-icons/fa6';
 import { Locale } from '../../store/locale';
+import { InputActionMeta } from 'react-select';
 import '../input/input.scss';
 
 export const RegisterForm: FC = () => {
@@ -19,6 +20,7 @@ export const RegisterForm: FC = () => {
 
   const {
     handleSubmit,
+    getValues,
     formState: { errors },
   } = methods;
 
@@ -61,6 +63,14 @@ export const RegisterForm: FC = () => {
       label: Locale.female || 'Female',
     },
   ];
+
+  const handleChangeValue = (actionMeta: InputActionMeta) => {
+    if (actionMeta.action === 'set-value')
+      setTimeout(() => {
+        const gender = getValues('gender.value');
+        fetchNui('changeGender', gender);
+      }, 500);
+  };
 
   const nationalityOptions: any = [];
   config.nationalities.map((key, index) => nationalityOptions.push({ value: key, label: key }));
@@ -112,6 +122,7 @@ export const RegisterForm: FC = () => {
             errors={errors}
             options={genderOptions}
             icon={<FaGenderless />}
+            onChangeValue={(newValue, actionMeta) => handleChangeValue(actionMeta)}
           />
         </div>
         <div className="flex justify-center">

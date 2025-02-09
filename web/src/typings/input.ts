@@ -1,6 +1,7 @@
 import { RegisterFormType } from '../utils/register';
 import { FieldErrors } from 'react-hook-form';
 import { ReactElement } from 'react';
+import { InputActionMeta } from 'react-select';
 
 type RegisterFieldName = 'firstname' | 'lastname' | 'nationality' | 'birthdate' | 'gender';
 
@@ -32,4 +33,5 @@ export interface InputDateProps extends InputProps {
 
 export interface ReactSelectProps extends SelectProps {
   isMulti: boolean;
+  onChangeValue?: (newValue: string, actionMeta: InputActionMeta) => void;
 }
