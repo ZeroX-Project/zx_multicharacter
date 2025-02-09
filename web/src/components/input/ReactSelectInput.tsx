@@ -28,7 +28,7 @@ export const ReactSelectInput: FC<ReactSelectProps> = ({ name, label, errors, op
                   control: (state) =>
                     `form__select ${Object.prototype.hasOwnProperty.call(errors, name) && !state.isFocused && '!border-2 !border-red-500'} `,
                 }}
-                className="cursor-pointer appearance-none text-gray-700"
+                className="cursor-pointer appearance-none"
                 styles={{
                   control: (baseStyles, state) => ({
                     ...baseStyles,
@@ -40,13 +40,26 @@ export const ReactSelectInput: FC<ReactSelectProps> = ({ name, label, errors, op
                     boxShadow: state.theme ? 'none' : 'none',
                     paddingInlineStart: '22px',
                   }),
+                  placeholder: (styles) => ({
+                    ...styles,
+                    color: 'rgb(212 212 212 / 0.6)',
+                  }),
                   option: (styles, { isDisabled, isFocused, isSelected }) => ({
                     ...styles,
                     backgroundColor: isFocused ? '#CCEEF2' : isSelected ? '#6CB9D8' : 'transparent',
+                    color: isFocused ? '#374151' : isSelected ? '#6b7280' : '#6b7280d0',
                   }),
                   menu: (styles) => ({
                     ...styles,
                     zIndex: 20,
+                  }),
+                  singleValue: (styles) => ({
+                    ...styles,
+                    color: 'rgb(245 245 245 / var(--tw-text-opacity, 1))',
+                  }),
+                  input: (styles) => ({
+                    ...styles,
+                    color: 'rgb(245 245 245 / var(--tw-text-opacity, 1))',
                   }),
                 }}
               />

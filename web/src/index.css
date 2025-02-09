@@ -86,6 +86,10 @@ body {
   user-select: none;
 }
 
+.custom-background {
+  @apply border-sky-300 bg-gradient-to-br from-sky-300/50 to-rose-200/30 shadow-md
+}
+
 #root {
   @apply h-screen
 }

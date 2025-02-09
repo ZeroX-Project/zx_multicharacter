@@ -9,58 +9,46 @@ import { fetchNui } from './utils/fetchNui';
 import { OpenNUI } from './components';
 import { setAssetsPath } from './store/assetsPath';
 
-debugData([
-  {
-    action: 'registerNewCharacter',
-    data: true,
-  },
-]);
 // debugData([
 //   {
-//     action: 'openUI',
-//     data: {
-//       playerId: 1,
-//       characters: [
-//         {
-//           citizenid: 'xyz123',
-//           firstname: 'John',
-//           lastname: 'Elish',
-//           dob: 'dd/mm/yyyy',
-//           national: 'Indonesia',
-//           sex: 'Male',
-//           job: 'Warga',
-//           jobGrade: 'Pengangguran',
-//           position: 'xyz',
-//           index: '1',
-//         },
-//         {
-//           citizenid: 'xyz321',
-//           firstname: 'John2',
-//           lastname: 'Elish2',
-//           dob: 'dd/mm/yy',
-//           national: 'Indonesia',
-//           sex: 'Male',
-//           job: 'Warga',
-//           jobGrade: 'Pengangguran',
-//           position: 'xyz',
-//           index: '2',
-//         },
-//         {
-//           citizenid: 'xyz312312',
-//           firstname: 'John2',
-//           lastname: 'Elish2',
-//           dob: 'dd/mm/yy',
-//           national: 'Indonesia',
-//           sex: 'Male',
-//           job: 'Warga',
-//           jobGrade: 'Pengangguran',
-//           position: 'xyz',
-//           index: '2',
-//         },
-//       ],
-//     },
+//     action: 'registerNewCharacter',
+//     data: true,
 //   },
 // ]);
+debugData([
+  {
+    action: 'openUI',
+    data: {
+      playerId: 1,
+      characters: [
+        {
+          citizenid: 'xyz123',
+          firstname: 'John',
+          lastname: 'Elish',
+          dob: 'dd/mm/yyyy',
+          national: 'Indonesia',
+          sex: 'Male',
+          job: 'Warga',
+          jobGrade: 'Pengangguran',
+          position: 'xyz',
+          index: '1',
+        },
+        {
+          citizenid: 'xyz321',
+          firstname: 'John2',
+          lastname: 'Elish2',
+          dob: 'dd/mm/yy',
+          national: 'Indonesia',
+          sex: 'Male',
+          job: 'Warga',
+          jobGrade: 'Pengangguran',
+          position: 'xyz',
+          index: '2',
+        },
+      ],
+    },
+  },
+]);
 
 export const App: FC = () => {
   const dispatch = useAppDispatch();

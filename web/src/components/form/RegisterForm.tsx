@@ -78,7 +78,7 @@ export const RegisterForm: FC = () => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-5 flex w-[400px] flex-col gap-5 rounded-md border border-sky-300 bg-sky-300 bg-opacity-25 p-4 backdrop-filter">
+        <div className="custom-background mb-5 flex w-[400px] flex-col gap-5 rounded-md border p-4 backdrop-filter">
           <Input
             type="text"
             label={Locale.firstname || 'First Name'}

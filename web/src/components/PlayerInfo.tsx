@@ -1,16 +1,15 @@
 import React from 'react';
 import { CharacterInfoProp } from '../typings';
-import { FaCalendar, FaGenderless, FaGlobe, FaHashtag, FaPaperPlane, FaUserTag, FaUserTie } from 'react-icons/fa6';
-import { callbackNui } from '../utils/callbackNui';
+import { FaCalendar, FaGenderless, FaGlobe, FaHashtag, FaUserTag, FaUserTie } from 'react-icons/fa6';
 import { Locale } from '../store/locale';
 
 export const PlayerInfo: React.FC<{ characterData: CharacterInfoProp }> = ({ characterData }) => {
   return (
-    <div className="mb-5 w-[500px] rounded-md border border-sky-300 bg-sky-300 bg-opacity-35 p-2 text-lg backdrop-filter">
-      <div className="flex w-full flex-col">
+    <div className="custom-background mb-5 w-[500px] rounded-md border p-2 text-lg backdrop-filter">
+      <div className="flex w-full flex-col [text-shadow:_0_2px_4px_rgb(75_85_99_/_0.5)]">
         {characterData && (
           <>
-            <p className="text-4xl font-bold tracking-tight">
+            <p className="text-center text-4xl font-bold tracking-tight">
               {characterData.firstname} <span className="text-2xl tracking-tight">{characterData.lastname}</span>
             </p>
 

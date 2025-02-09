@@ -1,16 +1,16 @@
 .form {
   @apply flex flex-col rounded-md p-4 shadow-md;
   &__title {
-    @apply text-center text-xl font-semibold text-gray-700;
+    @apply text-center text-xl font-semibold text-gray-700 [text-shadow:_0_2px_4px_rgb(75_85_99_/_0.5)];
   }
   &__label {
-    @apply mb-2 font-medium;
+    @apply mb-2 font-medium [text-shadow:_0_2px_4px_rgb(75_85_99_/_0.5)];
   }
   &__input {
-    @apply flex h-[40px] w-full items-center justify-center rounded bg-sky-100 px-2 ps-8 leading-tight text-gray-700 placeholder-gray-500 shadow outline-none duration-200 focus:border-sky-200 !important;
+    @apply flex h-[40px] w-full items-center justify-center rounded bg-sky-100/35 px-2 ps-8 leading-tight text-neutral-100 placeholder-neutral-300/60 shadow outline-none duration-200 focus:border-sky-200 !important;
   }
   &__select {
-    @apply flex h-[40px] w-full items-center justify-center rounded bg-sky-100 leading-tight text-gray-700 shadow outline-none duration-200 focus:border-sky-200 !important;
+    @apply flex h-[40px] w-full items-center justify-center rounded bg-sky-100/35 leading-tight text-neutral-100 shadow outline-none duration-200 focus:border-sky-200 !important;
   }
   &__error {
     @apply py-1 text-sm text-red-500;

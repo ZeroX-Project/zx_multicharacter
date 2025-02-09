@@ -74,7 +74,7 @@ export const CharacterSelect: React.FC<{ playerData: PlayerDataProp | undefined 
               Array.from(Array(characterCount), (e, arrayIndex) => (
                 <button
                   key={arrayIndex}
-                  className="flex h-10 w-10 items-center justify-center rounded-md border border-sky-300 bg-sky-300 bg-opacity-45 p-2 text-center align-middle backdrop-filter transition-all duration-100 ease-in-out hover:bg-sky-400 hover:bg-opacity-45"
+                  className="custom-background flex h-10 w-10 items-center justify-center rounded-md border p-2 text-center align-middle backdrop-filter transition-all duration-100 ease-in-out hover:bg-sky-400 hover:bg-opacity-45"
                   onClick={(e) => createCharacterHandler(e)}
                 >
                   <FaPlus />
