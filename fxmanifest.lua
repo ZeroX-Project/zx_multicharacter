@@ -15,18 +15,11 @@ shared_scripts {
 
 ox_libs {
   'locale',
-  'table',
-  'math',
 }
 
 client_scripts {
   '@qbx_core/modules/playerdata.lua',
   'client.lua',
-}
-
-server_scripts {
-  '@oxmysql/lib/MySQL.lua',
-  'server.lua',
 }
 
 files {
