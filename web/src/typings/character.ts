@@ -8,5 +8,7 @@ export type CharacterInfoProp = {
   job: string;
   jobGrade: string;
   position: string;
+  cash: string;
+  bank: string;
   index: string;
 };

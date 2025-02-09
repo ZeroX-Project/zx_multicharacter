@@ -1,6 +1,6 @@
 import React from 'react';
 import { CharacterInfoProp } from '../typings';
-import { FaCalendar, FaGenderless, FaGlobe, FaHashtag, FaUserTag, FaUserTie } from 'react-icons/fa6';
+import { FaCalendar, FaDollarSign, FaGenderless, FaGlobe, FaHashtag, FaSackDollar, FaUserTag, FaUserTie } from 'react-icons/fa6';
 import { Locale } from '../store/locale';
 
 export const PlayerInfo: React.FC<{ characterData: CharacterInfoProp }> = ({ characterData }) => {
@@ -54,6 +54,20 @@ export const PlayerInfo: React.FC<{ characterData: CharacterInfoProp }> = ({ cha
                 {Locale.gender || 'Gender'}
                 <p className="flex items-center gap-2 text-neutral-50">
                   <FaGenderless className="text-neutral-300" /> {characterData.sex}
+                </p>
+              </div>
+
+              <div className="mb-2 tracking-tight text-neutral-300">
+                {Locale.cash || 'Cash'}
+                <p className="flex items-center gap-2 text-neutral-50">
+                  <FaDollarSign className="text-neutral-300" /> {characterData.cash || '0'}
+                </p>
+              </div>
+
+              <div className="mb-2 tracking-tight text-neutral-300">
+                {Locale.bank || 'Bank'}
+                <p className="flex items-center gap-2 text-neutral-50">
+                  <FaSackDollar className="text-neutral-300" /> {characterData.bank || '0'}
                 </p>
               </div>
             </div>

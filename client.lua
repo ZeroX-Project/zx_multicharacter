@@ -180,6 +180,8 @@ local function chooseCharacter()
         job = character.job.label,
         jobGrade = character.job.grade.name,
         coords = character.position,
+        cash = character.money.cash,
+        bank = character.money.bank,
         index = i
       }
     else
@@ -358,6 +360,7 @@ end)
 
 RegisterNUICallback('changeGender', function(gender, cb)
   previewPed(nil, gender)
+  cb({ 'ok' })
 end)
 
 RegisterNetEvent('qbx_core:client:playerLoggedOut', function()

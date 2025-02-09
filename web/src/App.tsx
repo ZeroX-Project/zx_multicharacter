@@ -32,6 +32,8 @@ debugData([
           jobGrade: 'Pengangguran',
           position: 'xyz',
           index: '1',
+          cash: 0,
+          bank: 5000,
         },
         {
           citizenid: 'xyz321',
@@ -44,6 +46,8 @@ debugData([
           jobGrade: 'Pengangguran',
           position: 'xyz',
           index: '2',
+          cash: 0,
+          bank: 100,
         },
       ],
     },
