@@ -46,10 +46,11 @@ export const CharacterSelect: React.FC<{ playerData: PlayerDataProp | undefined 
   }
 
   function handleDialog(e: any) {
-    if (e === 'no') {
+    if (e === 'yes') {
       setShowDialog(false);
+      fetchNui('deleteCharacter', activePlayer);
     }
-    fetchNui('deleteCharacter', activePlayer);
+    setShowDialog(false);
   }
 
   return (
